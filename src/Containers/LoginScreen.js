@@ -6,7 +6,6 @@
 import React, { Component } from "react";
 import { Button, Platform, StyleSheet, Text, View } from "react-native";
 import { connect } from "react-redux";
-import CounterActions from "../Redux/CounterRedux";
 
 const styles = StyleSheet.create({
   container: {
@@ -31,26 +30,16 @@ const styles = StyleSheet.create({
 });
 
 type Props = {};
-class CounterScreen extends Component<Props> {
+class LoginScreen extends Component<Props> {
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>{"state: " + this.props.counter}</Text>
+        <Text style={styles.welcome}>{"Hi: " + this.props.username}</Text>
         <View style={styles.inLine}>
           <Button
-            onPress={() => this.props.increment()}
+            onPress={() => this.props.navigation.navigate('Counter')}
             style={styles.button}
-            title="Add"
-          />
-          <Button
-            onPress={() => this.props.decrement()}
-            style={styles.button}
-            title="Subtract"
-          />
-          <Button
-            onPress={() => this.props.navigation.navigate('Login')}
-            style={styles.button}
-            title="Go To Login"
+            title="Go To Counter"
           />
         </View>
       </View>
@@ -60,15 +49,12 @@ class CounterScreen extends Component<Props> {
 
 const mapStateToProps = state => {
 	return {
-		counter: state.counter.counterValue,
+		username: state.login.username,
 	};
 };
 
 const mapDispatchToProps = dispatch => {
-	return {
-		increment: () => dispatch(CounterActions.increment()),
-		decrement: () => dispatch(CounterActions.decrement())
-	};
+	return {};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(CounterScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(LoginScreen);
