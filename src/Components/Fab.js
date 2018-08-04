@@ -20,17 +20,17 @@ const styles = StyleSheet.create({
 });
 
 export default class Fab extends Component {
-  static defaultProps = { onPress: () => null };
+  static defaultProps = { handlePress: () => null };
 
   static propTypes = {
-    onPress: PropTypes.func,
+    handlePress: PropTypes.func,
     style: PropTypes.object
   };
 
   render() {
-    const { onPress } = this.props;
+    const { handlePress } = this.props;
     return (
-      <TouchableOpacity style={styles.fab} onpress={() => onPress()}>
+      <TouchableOpacity style={styles.fab} onPress={() => handlePress()}>
         <Icon name="plus" size={30} color="#01a699" />
       </TouchableOpacity>
     );

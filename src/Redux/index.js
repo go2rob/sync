@@ -1,50 +1,51 @@
-import rootSaga from '../Sagas/'
+import rootSaga from "../Sagas/";
 
-import { createStore, applyMiddleware, compose, combineReducers } from 'redux'
-import { autoRehydrate } from 'redux-persist'
-import Config from '../Config/DebugConfig'
-import createSagaMiddleware from 'redux-saga'
-import RehydrationServices from '../Services/RehydrationServices'
-import ReduxPersist from '../Config/ReduxPersist'
+import { createStore, applyMiddleware, compose, combineReducers } from "redux";
+import { autoRehydrate } from "redux-persist";
+import Config from "../Config/DebugConfig";
+import createSagaMiddleware from "redux-saga";
+import RehydrationServices from "../Services/RehydrationServices";
+import ReduxPersist from "../Config/ReduxPersist";
 
 const configureStore = (rootReducer, rootSaga) => {
   /* ------------- Redux Configuration ------------- */
-  const middleware = []
-  const enhancers = []
+  const middleware = [];
+  const enhancers = [];
 
   /* ------------- Saga Middleware ------------- */
-  const sagaMonitor = null
-  const sagaMiddleware = createSagaMiddleware({ sagaMonitor })
-  middleware.push(sagaMiddleware)
+  const sagaMonitor = null;
+  const sagaMiddleware = createSagaMiddleware({ sagaMonitor });
+  middleware.push(sagaMiddleware);
 
   /* ------------- Assemble Middleware ------------- */
-  enhancers.push(applyMiddleware(...middleware))
+  enhancers.push(applyMiddleware(...middleware));
 
   /* ------------- AutoRehydrate Enhancer ------------- */
   // add the autoRehydrate enhancer
   if (ReduxPersist.active) {
-    enhancers.push(autoRehydrate())
+    enhancers.push(autoRehydrate());
   }
 
-  const store = createStore(rootReducer, compose(...enhancers))
+  const store = createStore(rootReducer, compose(...enhancers));
 
   // configure persistStore and check reducer version number
   if (ReduxPersist.active) {
-    RehydrationServices.updateReducers(store)
+    RehydrationServices.updateReducers(store);
   }
 
   // kick off root saga
-  sagaMiddleware.run(rootSaga)
+  sagaMiddleware.run(rootSaga);
 
-  return store
-}
+  return store;
+};
 
 export default () => {
   /* ------------- Assemble The Reducers ------------- */
   const rootReducer = combineReducers({
-    login: require('./LoginRedux').reducer,
-    counter: require('./CounterRedux').reducer,
-  })
+    login: require("./LoginRedux").reducer,
+    counter: require("./CounterRedux").reducer,
+    expense: require("./ExpenseRedux").reducer
+  });
 
-  return configureStore(rootReducer, rootSaga)
-}
+  return configureStore(rootReducer, rootSaga);
+};

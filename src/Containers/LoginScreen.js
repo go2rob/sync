@@ -37,7 +37,7 @@ class LoginScreen extends Component<Props> {
         <Text style={styles.welcome}>{"Hi: " + this.props.username}</Text>
         <View style={styles.inLine}>
           <Button
-            onPress={() => this.props.navigation.navigate('Counter')}
+            onPress={() => this.props.navigation.navigate("Counter")}
             style={styles.button}
             title="Go To Counter"
           />
@@ -48,13 +48,16 @@ class LoginScreen extends Component<Props> {
 }
 
 const mapStateToProps = state => {
-	return {
-		username: state.login.username,
-	};
+  return {
+    username: state.login.username
+  };
 };
 
 const mapDispatchToProps = dispatch => {
-	return {};
+  return {};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginScreen);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(LoginScreen);
