@@ -4,9 +4,18 @@
  */
 
 import React, { Component } from "react";
-import { Button, Platform, StyleSheet, Text, View } from "react-native";
+import {
+  Button,
+  Platform,
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity
+} from "react-native";
 import { connect } from "react-redux";
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import Fab from "../Components/Fab";
+import Header from "../Components/Header";
 
 const styles = StyleSheet.create({
   container: {
@@ -20,15 +29,16 @@ const styles = StyleSheet.create({
     textAlign: "center",
     margin: 10
   },
-  inLine: {
-    flexDirection: "row",
+  body: {
+    flex: 1,
     width: "100%",
-    justifyContent: "space-around"
+    alignItems: "center",
+    justifyContent: "center"
   },
   button: {
     width: "30"
   },
-  icon:{
+  icon: {
     height: "10",
     width: "10"
   }
@@ -37,35 +47,39 @@ const styles = StyleSheet.create({
 type Props = {};
 class HomeScreen extends Component<Props> {
   static navigationOptions = {
-    drawerLabel: 'Home',
+    drawerLabel: "Home",
     drawerIcon: ({ tintColor }) => (
       <Icon name="home" size={30} color={tintColor} />
-    ),
+    )
   };
 
   render() {
     return (
       <View style={styles.container}>
-        <View style={styles.inLine}>
+        <Header title="Home" navigation={this.props.navigation} />
+        <View style={styles.body}>
           <Text>Home Screen</Text>
           <Button
-            onPress={() => this.props.navigation.navigate('SecondScreen')}
+            onPress={() => this.props.navigation.navigate("SecondScreen")}
             style={styles.button}
             title="Go To Second"
           />
         </View>
+        <Fab />
       </View>
     );
   }
 }
 
 const mapStateToProps = state => {
-	return {
-	};
+  return {};
 };
 
 const mapDispatchToProps = dispatch => {
-	return {};
+  return {};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(HomeScreen);

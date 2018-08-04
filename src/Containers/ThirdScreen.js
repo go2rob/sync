@@ -4,8 +4,18 @@
  */
 
 import React, { Component } from "react";
-import { Button, Platform, StyleSheet, Text, View } from "react-native";
+import {
+  Button,
+  Platform,
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity
+} from "react-native";
 import { connect } from "react-redux";
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import Fab from "../Components/Fab";
+import Header from "../Components/Header";
 
 const styles = StyleSheet.create({
   container: {
@@ -19,41 +29,57 @@ const styles = StyleSheet.create({
     textAlign: "center",
     margin: 10
   },
-  inLine: {
-    flexDirection: "row",
+  body: {
+    flex: 1,
     width: "100%",
-    justifyContent: "space-around"
+    alignItems: "center",
+    justifyContent: "center"
   },
   button: {
     width: "30"
+  },
+  icon: {
+    height: "10",
+    width: "10"
   }
 });
 
 type Props = {};
 class ThirdScreen extends Component<Props> {
+  static navigationOptions = {
+    drawerLabel: "Third",
+    drawerIcon: ({ tintColor }) => (
+      <Icon name="home" size={30} color={tintColor} />
+    )
+  };
+
   render() {
     return (
       <View style={styles.container}>
-        <View style={styles.inLine}>
+        <Header title="Third" navigation={this.props.navigation} />
+        <View style={styles.body}>
           <Text>Third Screen</Text>
           <Button
-            onPress={() => this.props.navigation.navigate('SecondScreen')}
+            onPress={() => this.props.navigation.navigate("SecondScreen")}
             style={styles.button}
             title="Go To Second"
           />
         </View>
+        <Fab />
       </View>
     );
   }
 }
 
 const mapStateToProps = state => {
-	return {
-	};
+  return {};
 };
 
 const mapDispatchToProps = dispatch => {
-	return {};
+  return {};
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ThirdScreen);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ThirdScreen);
