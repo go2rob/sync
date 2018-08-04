@@ -1,24 +1,30 @@
 import React, { Component } from "react";
 import CounterScreen from "./CounterScreen";
 import LoginScreen from "./LoginScreen";
-import { createStackNavigator } from 'react-navigation';
+import HomeScreen from "./HomeScreen";
+import SecondScreen from "./SecondScreen";
+import ThirdScreen from "./ThirdScreen";
+import { createStackNavigator, createDrawerNavigator } from 'react-navigation';
 
-const RootStack = createStackNavigator({
-  Counter: {
-    screen: CounterScreen
+const DrawerNavigator = createDrawerNavigator({
+  Home:{
+      screen: HomeScreen
   },
-  Login: {
-    screen: LoginScreen
+  SecondScreen:{
+      screen: SecondScreen
+  },
+  ThirdScreen:{
+    screen: ThirdScreen
   }
-},
-{
-  initialRouteName: 'Counter',
+},{
+  initialRouteName: 'Home'
 });
+// drawerWidth: 300
 
 export default class RootContainer extends Component {
   render() {
     return (
-      <RootStack />
+      <DrawerNavigator />
     )
   }
 }
