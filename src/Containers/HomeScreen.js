@@ -117,7 +117,7 @@ class HomeScreen extends Component<Props> {
         <View style={styles.body}>
           <FlatList
             data={allExpenses}
-            keyExtractor={item => item.id}
+            keyExtractor={item => item.id.toString()}
             renderItem={this.renderItem}
             ItemSeparatorComponent={this.renderSeparator}
           />
